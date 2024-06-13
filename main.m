@@ -44,7 +44,7 @@ fprintf('主瓣幅值: %.2f\n', peak_amp)
 
 %相角
 signal_theta_vector = angle(fft_voltage);%*180/pi;
-signal_theta = signal_theta_vector(locs(max_idx));
+signal_theta = -signal_theta_vector(locs(max_idx));
 fprintf('相位: %.2f\n', signal_theta)
 
 %平均偏置
@@ -54,7 +54,7 @@ fprintf('偏置: %.2f\n', signal_average)
 %欧米伽
 w = 2*pi*peak_freq;
 fprintf("表达式: y = %.2fsin(%.2fx%+.2f)%+.2f\n", peak_amp/1000, w, signal_theta, signal_average)
-y_new = peak_amp/1000*sin(w*time-signal_theta)+signal_average;
+y_new = peak_amp/1000*sin(w*time+signal_theta)+signal_average;
 
 subplot(plot_num,1,1);
 hold on
